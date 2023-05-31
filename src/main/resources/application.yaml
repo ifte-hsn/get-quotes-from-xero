@@ -1,0 +1,10 @@
+xero:
+  clientId: CLIENT_ID
+  clientSecret: CLIENT_SECRET
+  redirectURI: http://REDIRECT_URI
+  token:
+    server:
+      url: https://identity.xero.com/connect/token
+  auth:
+    server:
+      url: https://login.xero.com/identity/connect/authorize

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head::head}"></head>
+<body>
+
+
+<main>
+    <div class="container py-4">
+        <header th:replace="~{fragments/header::header}"></header>
+
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">List of Quotes</h1>
+                <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one
+                    in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it
+                    to your liking.</p>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <a th:href="@{/home?status=draft}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'draft'? 'active': ''}">Draft</a>
+                <a th:href="@{/home?status=deleted}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'deleted'? 'active': ''}">Deleted</a>
+                <a th:href="@{/home?status=sent}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'sent'? 'active': ''}">Sent</a>
+                <a th:href="@{/home?status=declined}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'declined'? 'active': ''}">Declined</a>
+                <a th:href="@{/home?status=accepted}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'accepted'? 'active': ''}">Accepted</a>
+                <a th:href="@{/home?status=invoiced}" class="btn btn-outline-primary"
+                   th:classappend="${status == 'invoiced'? 'active': ''}">Invoiced</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Quote Number</th>
+                    <th>Date</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <th:block th:each="quote: ${quotes}">
+                    <tr>
+                        <td>
+                            <a th:href="@{'/getQuoteById?quoteID='+${quote.getQuoteID()}}"
+                               th:text="${quote.getQuoteID()}"></a>
+                        </td>
+                        <td th:text="${quote.getQuoteNumber()}"></td>
+                        <td th:text="${quote.getDateString()}"></td>
+                        <td th:text="${quote.getExpiryDateString()}"></td>
+                        <td th:text="${quote.getStatus()}"></td>
+                        <td th:text="${quote.getTotal()}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+
+
+        <footer th:replace="~{fragments/footer::footer}"></footer>
+    </div>
+</main>
+
+
+</body>
+</html>
